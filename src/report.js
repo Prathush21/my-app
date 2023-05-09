@@ -10,6 +10,8 @@ import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { useNavigate } from "react-router-dom";
+import { Button, Grid, Stack, TextField } from "@mui/material";
+
 
 
 
@@ -27,65 +29,26 @@ export default function Report(props) {
 
   
  
-  }
+  
 
   useEffect(() => {
     Axios.get("http://localhost:3001/api/report").then(
       (response) => {
         console.log(response.data);
 
-        setreportdata(...freelancerdata, response.data);
+        setreportdata(...reportdata, response.data);
         
       }
     );
   }, []);
 
-  console.log(freelancerdata);
-  console.log(JSON.parse(localStorage.getItem('type')))
 
-  function onClick3() {
-    navigate("/events/new", { replace: true });
-  }
-
-  function onClick4() {
-    navigate("/availablefreelancers", { replace: true });
-  }
-
-  function onClick1() {
-    navigate("/freelancers/new", { replace: true });
-  }
-  function onClick2(row) {
-    localStorage.setItem('data', JSON.stringify(row));
-
-    navigate("/freelancers/update", { replace: true });
-  }
-
-  function onClick3() {
-    navigate("/freelancerpayment", { replace: true });
-  }
-
-  function onClick4(data) {
-    localStorage.setItem('data',JSON.stringify(data))
-    navigate("/freelancerpayment/new", { replace: true });
-  }
-
-  function deletefreelancer(freelancerid) {
-    Axios.post("http://localhost:3001/api/deletefreelancer", {
- 
-      freelancerid:freelancerid
-    }).then((response) => {
-      console.log("Nishaa Gopi");
-      // alert(response.data.message);
-      window.location.reload(false);
-    });
-  }
 
   return (
     <div>
-      <Typeselect type={type}/>
-      <br></br>
+    
       <Stack direction="row" alignItems="center" spacing={5} paddingBottom={5}>
-      <Typeselect2 type={type}/>        <Grid container justify="space-around" paddingBottom={5} paddingTop={5}>
+             <Grid container justify="space-around" paddingBottom={5} paddingTop={5}>
           <Stack
             direction="row"
             alignItems="center"
@@ -93,29 +56,11 @@ export default function Report(props) {
             paddingLeft={15}
             paddingBottom={5}
           >
-            <Button
-              className="buttons2"
-              type="submit"
-              size="lg"
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-              onClick={onClick1}
-            >
-              Add new freelancer
-            </Button>
+            
 
-            <h1>Freelancers</h1>
+            <h1>Report</h1>
            
-            <Button
-              className="buttons2"
-              type="submit"
-              size="lg"
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-              onClick={onClick3}
-            >
-              View All Freelancer Pay
-            </Button>
+          
           </Stack>
 
           <TableContainer component={Paper}>
@@ -127,71 +72,39 @@ export default function Report(props) {
               <TableHead>
                 <TableRow>
                   <TableCell>
-                    <b>Freelancer ID</b>
+                    <b>Stu_no</b>
                   </TableCell>
                   <TableCell>
-                    <b>Freelancer Name</b>
+                    <b>Student_name</b>
                   </TableCell>
                   <TableCell>
-                    <b>Phone no.</b>
+                    <b>Course code</b>
                   </TableCell>
                   <TableCell>
-                    <b>NIC</b>
+                    <b>Title</b>
                   </TableCell>
+                  
                   <TableCell>
-                    <b>Position</b>
+                    <b>Marks</b>
                   </TableCell>
-                  <TableCell>
-                    <b>Address</b>
-                  </TableCell>
-                  <TableCell>
-                    <b>Daily Payment</b>
-                  </TableCell>
-                  <TableCell>
-                    <b>Gender</b>
-                  </TableCell>
-                  <TableCell>
-                    <b></b>
-                  </TableCell>
+                 
                 </TableRow>
               </TableHead>
               <TableBody>
-                {freelancerdata.map((row) => (
+                {reportdata.map((row) => (
                   <TableRow
                     key={row.name}
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
                     <TableCell component="th" scope="row">
-                      {row.freelancerid}
+                      {row.Stu_No}
                     </TableCell>
-                    <TableCell>{row.name}</TableCell>
-                    <TableCell>{row.phone}</TableCell>
-                    <TableCell>{row.nic}</TableCell>
-                    <TableCell>{row.position}</TableCell>
-                    <TableCell>{row.address}</TableCell>
-                    <TableCell>{row.dailypay}</TableCell>
-                    <TableCell>{row.gender}</TableCell>
-                    <TableCell>
-                      {" "}
-                      <Stack direction="row" spacing={1}>
-                        <IconButton aria-label="edit" onClick={()=>onClick2(row)}>
-                          <EditIcon />
-                          
-                        </IconButton>
-                        <IconButton aria-label="delete" color="error" onClick={()=>deletefreelancer(row.freelancerid)}>
-                          <DeleteIcon />
-                        </IconButton>
-                        <Button
-                          type="submit"
-                          size="sm"
-                          variant="contained"
-                          sx={{ mt: 3, mb: 2 }}
-                          onClick={()=>onClick4(row)}
-                        >
-                          Add freelancer pay
-                        </Button>
-                      </Stack>
-                    </TableCell>
+                    <TableCell>{row.Stu_name}</TableCell>
+                    <TableCell>{row.Course_code}</TableCell>
+                    <TableCell>{row.Title}</TableCell>
+                    <TableCell>{row.Markls}</TableCell>
+                   
+                    
                   </TableRow>
                 ))}
               </TableBody>
@@ -200,7 +113,6 @@ export default function Report(props) {
         </Grid>
       </Stack>
 
-      <Footer />
     </div>
   );
 }

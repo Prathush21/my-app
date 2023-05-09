@@ -37,6 +37,24 @@ app.post("/api/addform", (req, res) => {
     );
   });
 
+  app.get("/api/report", (req, res) => {
+    const data = req.body.data;
+    console.log(req);
+  
+    const sqlInsert2 =
+      "select Stu_no, Stu_name, Course_code, Title, Marks ((enrollment left join student using (Stu_no)) as T left join course using (Course_code));";
+  
+    db.query(
+      sqlInsert2,
+      (err, result) => {
+        if (err) {
+          console.log(err);
+        } else {
+          res.send(result);
+        }
+      }
+    );
+  });
   app.listen(3002, () => {
     console.log("Yey, your server is running on port 3002");
   });
