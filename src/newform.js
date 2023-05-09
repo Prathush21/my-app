@@ -8,12 +8,11 @@ import Axios from "axios";
 
 export default function NewForm() {
   const [formdata, setformdata] = useState({
-    studentno:null,
+    studentno: null,
     name: null,
     address: null,
     dob: null,
-    phonenumber: null
-
+    phonenumber: null,
   });
 
   const navigate = useNavigate();
@@ -25,15 +24,18 @@ export default function NewForm() {
   const onSubmit = () => {
     console.log(formdata);
 
-    Axios.post("http://localhost:3001/api/addform", {
+    Axios.post("http://localhost:3002/api/addform", {
       data: formdata,
     }).then((response) => {});
   };
   return (
-    <div> 
+    <div>
       <Stack direction="row" alignItems="center" spacing={5} paddingBottom={5}>
         <div className="full-form">
-          <h1 className="Heading" style={{ marginLeft:40 }}> Add student details</h1>
+          <h1 className="Heading" style={{ marginLeft: 40 }}>
+            {" "}
+            Add student details
+          </h1>
           <div className="addform">
             <Box
               component="form"
@@ -90,6 +92,9 @@ export default function NewForm() {
                   id="quantity"
                   autoComplete
                   onChange={(e) => handleInputChange(e)}
+                  inputProps={{
+                    max: new Date().toISOString().slice(0, 10),
+                  }}
                 />
               </Stack>
 
@@ -114,7 +119,7 @@ export default function NewForm() {
                 type="submit"
                 size="lg"
                 variant="contained"
-                sx={{ mt: 3, mb: 2, marginLeft:20 }}
+                sx={{ mt: 3, mb: 2, marginLeft: 20 }}
                 onClick={onSubmit}
               >
                 Add{" "}
