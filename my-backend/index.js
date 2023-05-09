@@ -22,7 +22,7 @@ app.post("/api/addform", (req, res) => {
     console.log(req);
   
     const sqlInsert2 =
-      "insert into student ( student_no,name, address, dob, phoneno) values (?,?,?,?,?);";
+      "insert into student ( Stu_no,Name, Address, DOB, Contact_No) values (?,?,?,?,?);";
   
     db.query(
       sqlInsert2,
