@@ -6,9 +6,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import IconButton from "@mui/material/IconButton";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
+
 import { useNavigate } from "react-router-dom";
 import { Button, Grid, Stack, TextField } from "@mui/material";
 
@@ -20,7 +18,6 @@ import Axios from "axios";
 
 import { useState, useEffect } from "react";
 import {Link} from 'react-router-dom';
-import CashierHeader from "../components/cashierheader";
 
 
 export default function Report(props) {
